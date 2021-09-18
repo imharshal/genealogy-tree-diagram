@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style type="text/css">
+        /*#region Organizational Chart*/
+
+        .genealogy * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .genealogy ul {
+            padding-top: 20px;
+            position: relative;
+            -transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            display: flex;
+
+        }
+
+        .genealogy li {
+            float: left;
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            -transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
+
+        /*We will use ::before and ::after to draw the connectors*/
+        .genealogy li::before,
+        .genealogy li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 2px solid #696969;
+            width: 50%;
+            height: 18px;
+        }
+
+        .genealogy li::after {
+            right: auto;
+            left: 50%;
+            border-left: 2px solid #696969;
+        }
+
+        /*We need to remove left-right connectors from elements without
+    any siblings*/
+        .genealogy li:only-child::after,
+        .genealogy li:only-child::before {
+            display: none;
+        }
+
+        /*Remove space from the top of single children*/
+        .genealogy li:only-child {
+            padding-top: 0;
+        }
+
+        /*Remove left connector from first child and
+    right connector from last child*/
+        .genealogy li:first-child::before,
+        .genealogy li:last-child::after {
+            border: 0 none;
+        }
+
+        /*Adding back the vertical connector to the last nodes*/
+        .genealogy li:last-child::before {
+            border-right: 2px solid #696969;
+            border-radius: 0 5px 0 0;
+            -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0;
+        }
+
+        .genealogy li:first-child::after {
+            border-radius: 5px 0 0 0;
+            -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0;
+        }
+
+        /*Time to add downward connectors from parents*/
+        .genealogy ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 2px solid #696969;
+            width: 0;
+            height: 20px;
+        }
+
+        .genealogy li a {
+            height: auto;
+            width: 65px !important;
+            padding: 2px 5px;
+            text-decoration: none;
+            background-color: white;
+            /* color: #8b8b8b; */
+            font-family: arial, verdana, tahoma;
+            font-size: 11px;
+            display: inline-block;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            -transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            border-radius: 5px;
+            border: 1px solid #000
+        }
+
+        /*Time for some hover effects*/
+        /*We will apply the hover effect the the lineage of the element also*/
+        .genealogy li a:hover,
+        /* .genealogy li a:hover+ul li a {  // to select all child on hovering root*/
+        .genealogy li a:hover {
+            background: #cbcbcb;
+            color: #000;
+        }
+
+        /*Connector styles on hover*/
+        .genealogy li a:hover+ul li::after,
+        .genealogy li a:hover+ul li::before,
+        .genealogy li a:hover+ul::before,
+        .genealogy li a:hover+ul ul::before {
+            border-color: #696969;
+        }
+
+        /*#endregion*/
+        .genealogy>ul>li>ul>li>a {
+            width: auto;
+        }
+
+        .genealogy>ul>li>a {
+            width: auto;
+        }
+
+        .genealogy li li li a {
+            width: auto;
+        }
+
+        .user-icon {
+            font-size: 30px;
+            padding: 5px;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+
+            .genealogy li span {
+                padding: 5px !important;
+                height: 45px !important;
+                width: 45px !important;
+            }
+
+            .genealogy {
+                font-size: 8px !important;
+            }
+
+            .genealogy li {
+                padding: 20px 2px 0px 2px !important;
+            }
+
+            .genealogy li a {
+                height: auto;
+                width: 60px !important;
+                padding: 2px 5px;
+                text-decoration: none;
+                background-color: white;
+                /* color: red; */
+                font-family: arial, verdana, tahoma;
+                font-size: 10px;
+                display: inline-block;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                -transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                border-radius: 5px;
+                border: 1px solid #000
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-md-12">
+        <div class="genealogy text-center" style="overflow: auto;">
+            <ul>
+                <!-- root -->
+                <li>
+                    <a href="#" style="color: black">
+                        <div class="container-fluid">
+                            <div class="text-center">
+                                <i class="fa fa-user fa-3x user-icon"></i>
+                            </div>
+                            <div class="text-center">
+                                Harshal
+                            </div>
+                            <div class="text-center">
+                                Rank: root
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Child level -->
+                    <ul>
+                        <!-- left branch root -->
+                        <li>
+                            <a href="" style="color: black">
+                                <div class="container-fluid">
+                                    <div class="text-center">
+                                        <i class="fa fa-user fa-2x user-icon"></i>
+                                    </div>
+                                    <div class="">
+                                        Left Branch
+                                    </div>
+                                </div>
+                            </a>
+                            <ul>
+                                <!-- left branch child 1  -->
+                                <li>
+                                    <a href="" style="color: black">
+                                        <div class="container-fluid">
+                                            <div class="text-center">
+                                                <i class="fa fa-user fa-2x user-icon"></i>
+                                            </div>
+                                            <div class="text-center">
+                                                L1
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <!-- left branch child 2  -->
+                                <li>
+                                    <a href="" style="color: black">
+                                        <div class="container-fluid">
+                                            <div class="text-center">
+                                                <i class="fa fa-user fa-2x user-icon"></i>
+                                            </div>
+                                            <div class="text-center">
+                                                L2
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>     
+                                <!-- left branch child 2  -->
+                                <li>
+                                    <a href="" style="color: black">
+                                        <div class="container-fluid">
+                                            <div class="text-center">
+                                                <i class="fa fa-user fa-2x user-icon"></i>
+                                            </div>
+                                            <div class="text-center">
+                                                L3
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>     
+                            </ul>
+                     </li>
+                <!-- Right branch root -->
+                <li>
+                    <a href="" style="color: black">
+                        <div class="container-fluid">
+                            <div class="text-center">
+                                <i class="fa fa-user fa-2x user-icon"></i>
+                            </div>
+                            <div class="">
+                                Right Branch
+                            </div>
+                        </div>
+                    </a>
+                    <ul>
+                        <!-- Right branch child 1  -->
+                        <li>
+                            <a href="" style="color: black">
+                                <div class="container-fluid">
+                                    <div class="text-center">
+                                        <i class="fa fa-user fa-2x user-icon"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        R1
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Right branch child 2  -->
+                        <li>
+                            <a href="" style="color: black">
+                                <div class="container-fluid">
+                                    <div class="text-center">
+                                        <i class="fa fa-user fa-2x user-icon"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        R2
+                                    </div>
+                                </div>
+                            </a>
+                        </li>     
+                    </ul>
+             </li>
+              <!-- Extra branch root -->
+              <li>
+                <a href="" style="color: black">
+                    <div class="container-fluid">
+                        <div class="text-center">
+                            <i class="fa fa-user fa-2x user-icon"></i>
+                        </div>
+                        <div class="">
+                            Extra Branch
+                        </div>
+                    </div>
+                </a>
+                <ul>
+                    <!-- Extra branch child 1  -->
+                    <li>
+                        <a href="" style="color: black">
+                            <div class="container-fluid">
+                                <div class="text-center">
+                                    <i class="fa fa-user fa-2x user-icon"></i>
+                                </div>
+                                <div class="text-center">
+                                    E1
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Extra branch child 2  -->
+                    <li>
+                        <a href="" style="color: black">
+                            <div class="container-fluid">
+                                <div class="text-center">
+                                    <i class="fa fa-user fa-2x user-icon"></i>
+                                </div>
+                                <div class="text-center">
+                                    E2
+                                </div>
+                            </div>
+                        </a>
+                    </li>     
+                </ul>
+         </li>
+              
+        </div>
+    </div>
+
+
+</body>
+
+</html>
