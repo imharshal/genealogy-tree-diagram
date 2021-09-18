@@ -7,9 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style type="text/css">
-        /*#region Organizational Chart*/
+    
+    <!-- CSS Styles -->
+    <style type="text/css">  
 
+        /* Change css variables below according to your theme */
+        :root {
+            /* --connection-line-color: #696969;  */
+            --connection-line-color: orange; 
+            --hover-color: #fedf98;
+            --bottom-text-color: brown;
+            --user-icon-color: orange;
+            --box-border-color: orange;
+}
         .genealogy * {
             margin: 0;
             padding: 0;
@@ -43,7 +53,7 @@
             position: absolute;
             top: 0;
             right: 50%;
-            border-top: 2px solid #696969;
+            border-top: 2px solid var(--connection-line-color);
             width: 50%;
             height: 18px;
         }
@@ -51,7 +61,7 @@
         .genealogy li::after {
             right: auto;
             left: 50%;
-            border-left: 2px solid #696969;
+            border-left: 2px solid var(--connection-line-color);
         }
 
         /*We need to remove left-right connectors from elements without
@@ -75,7 +85,7 @@
 
         /*Adding back the vertical connector to the last nodes*/
         .genealogy li:last-child::before {
-            border-right: 2px solid #696969;
+            border-right: 2px solid var(--connection-line-color);
             border-radius: 0 5px 0 0;
             -webkit-border-radius: 0 5px 0 0;
             -moz-border-radius: 0 5px 0 0;
@@ -93,7 +103,7 @@
             position: absolute;
             top: 0;
             left: 50%;
-            border-left: 2px solid #696969;
+            border-left: 2px solid var(--connection-line-color);
             width: 0;
             height: 20px;
         }
@@ -113,16 +123,17 @@
             -webkit-transition: all 0.5s;
             -moz-transition: all 0.5s;
             border-radius: 5px;
-            border: 1px solid #000
+            border: 1px solid var(--box-border-color)
         }
 
         /*Time for some hover effects*/
         /*We will apply the hover effect the the lineage of the element also*/
-        .genealogy li a:hover,
         /* .genealogy li a:hover+ul li a {  // to select all child on hovering root*/
+        .genealogy li a:hover,
         .genealogy li a:hover {
-            background: #cbcbcb;
-            color: #000;
+            /* background: #cbcbcb; */
+            background: var(--hover-color);
+            /* color: #000; */
         }
 
         /*Connector styles on hover*/
@@ -130,7 +141,7 @@
         .genealogy li a:hover+ul li::before,
         .genealogy li a:hover+ul::before,
         .genealogy li a:hover+ul ul::before {
-            border-color: #696969;
+            border-color: var(--connection-line-color);
         }
 
         /*#endregion*/
@@ -149,6 +160,12 @@
         .user-icon {
             font-size: 30px;
             padding: 5px;
+            color:var(--user-icon-color);
+        }
+
+        .bottom-text{
+            color: var(--bottom-text-color);
+            font-weight: bold;
         }
 
         @media only screen and (max-width: 600px) {
@@ -201,10 +218,10 @@
                             <div class="text-center">
                                 <i class="fa fa-user fa-3x user-icon"></i>
                             </div>
-                            <div class="text-center">
+                            <div class="bottom-text">
                                 Harshal
                             </div>
-                            <div class="text-center">
+                            <div class="bottom-text">
                                 Rank: root
                             </div>
                         </div>
@@ -218,7 +235,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-user fa-2x user-icon"></i>
                                     </div>
-                                    <div class="">
+                                    <div class="bottom-text">
                                         Left Branch
                                     </div>
                                 </div>
@@ -231,7 +248,7 @@
                                             <div class="text-center">
                                                 <i class="fa fa-user fa-2x user-icon"></i>
                                             </div>
-                                            <div class="text-center">
+                                            <div class="bottom-text">
                                                 L1
                                             </div>
                                         </div>
@@ -245,7 +262,7 @@
                                             <div class="text-center">
                                                 <i class="fa fa-user fa-2x user-icon"></i>
                                             </div>
-                                            <div class="text-center">
+                                            <div class="bottom-text">
                                                 L2
                                             </div>
                                         </div>
@@ -258,7 +275,7 @@
                                             <div class="text-center">
                                                 <i class="fa fa-user fa-2x user-icon"></i>
                                             </div>
-                                            <div class="text-center">
+                                            <div class="bottom-text">
                                                 L3
                                             </div>
                                         </div>
@@ -273,7 +290,7 @@
                             <div class="text-center">
                                 <i class="fa fa-user fa-2x user-icon"></i>
                             </div>
-                            <div class="">
+                            <div class="bottom-text">
                                 Right Branch
                             </div>
                         </div>
@@ -286,7 +303,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-user fa-2x user-icon"></i>
                                     </div>
-                                    <div class="text-center">
+                                    <div class="bottom-text">
                                         R1
                                     </div>
                                 </div>
@@ -300,7 +317,7 @@
                                     <div class="text-center">
                                         <i class="fa fa-user fa-2x user-icon"></i>
                                     </div>
-                                    <div class="text-center">
+                                    <div class="bottom-text">
                                         R2
                                     </div>
                                 </div>
@@ -315,7 +332,7 @@
                         <div class="text-center">
                             <i class="fa fa-user fa-2x user-icon"></i>
                         </div>
-                        <div class="">
+                        <div class="bottom-text">
                             Extra Branch
                         </div>
                     </div>
@@ -328,7 +345,7 @@
                                 <div class="text-center">
                                     <i class="fa fa-user fa-2x user-icon"></i>
                                 </div>
-                                <div class="text-center">
+                                <div class="text-center bottom-text">
                                     E1
                                 </div>
                             </div>
@@ -342,7 +359,7 @@
                                 <div class="text-center">
                                     <i class="fa fa-user fa-2x user-icon"></i>
                                 </div>
-                                <div class="text-center">
+                                <div class="bottom-text">
                                     E2
                                 </div>
                             </div>
